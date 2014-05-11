@@ -17,9 +17,9 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
     for ( cur_id in id ) {
       fn = sprintf("%s/%03d.csv",directory,cur_id)
       cur_data <- read.csv(fn)
-      comp_data <- cur_data[complete.cases(cur_data),]
+      comp_data <- cur_data[!is.na(cur_data[,pollutant]),pollutant]
       
-      output <- c(output, comp_data[,pollutant])
+      output <- c(output, comp_data)
     }
   }
   
